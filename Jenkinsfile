@@ -4,7 +4,9 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'docker build -t myflaskapp .'
+        script {
+          def app = docker.build('myflaskapp', '-f Dockerfile .')
+        }
       }
     }
     stage('Test') {
@@ -14,16 +16,15 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-
-
-
-        sh 'docker run -d -p 5000:5000 myflaskapp'
+        sh 'docker stop myflaskapp || true'
+        sh 'docker rm myflaskapp || true'
+        sh 'docker run -d --name myflaskapp -p 5000:5000 myflaskapp'
       }
     }
     stage('Expose') {
       steps {
         ngrok([httpPort: 5000])
+      }
     }
-    }
-}
+  }
 }
