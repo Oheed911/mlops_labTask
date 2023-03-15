@@ -21,6 +21,7 @@ def predict():
     # make a prediction using the model
     prediction = model.predict(X)
 
+
     # create a response object
     response = {
         'prediction': prediction[0]
