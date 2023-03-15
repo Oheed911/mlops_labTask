@@ -19,3 +19,4 @@ model.fit(X, y)
 filename = 'linear_regression_model.pkl'
 with open(filename, 'wb') as file:
     pickle.dump(model, file)
+    
