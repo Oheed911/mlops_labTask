@@ -24,7 +24,6 @@ def predict():
 
     # create a response object
     response = {
-        
         'prediction': prediction[0]
     }
 
